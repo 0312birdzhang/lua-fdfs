@@ -363,6 +363,14 @@ function get_file_info(self, group_name, file_name)
     return self:read_file_info_result()
 end
 
+function get_file_info1(self, fileid)
+    local group_name, file_name, err = split_fileid(fileid)
+    if not group_name or not file_name then
+        return nil, "fileid error:" .. err
+    end
+    return self:get_file_info(group_name, file_name)
+end
+
 -- delete method
 function delete_file(self, group_name, file_name)
     local req, err = build_request(STORAGE_PROTO_CMD_DELETE_FILE, group_name, file_name)
