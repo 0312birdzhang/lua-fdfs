@@ -1,7 +1,7 @@
 # lua-fdfs
 FastDFS LUA client
 
-<pre>
+```
 
 local tracker = require('lib.fastdfs.tracker')
 local storage = require('lib.fastdfs.storage')
@@ -22,7 +22,7 @@ if not ok then
     ngx.exit(200)
 end
 
-local res, err = tk:query_storage_store()
+local res, err = tk:query_storage_store('group1')
 if not res then
     ngx.say("query storage error:" .. err)
     ngx.exit(200)
@@ -58,6 +58,13 @@ if not ok then
     ngx.exit(200)
 end
 
+local res, err = st:get_file_info1("group1/M00/00/00/wKhV-VFY71sEAAAAAAAAAKbO3LA277.txt")
+if not res then
+    ngx.say("query file info error: " .. err)
+    ngx.exit(200)
+else
+    ngx.say("file size: " .. res.size)
+end
 
 
 local ok, err = st:delete_file1("group1/M00/00/00/wKhV-VFY71sEAAAAAAAAAKbO3LA277.txt")
@@ -98,6 +105,4 @@ if not res then
 end
 
 
-
-
-</pre>
+```
